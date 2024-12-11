@@ -1,6 +1,6 @@
 package com.serviciosya.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -17,6 +17,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,7 +43,8 @@ public class Usuario {
 	private String apellidoMat;
 
 	@Column(name="fecha_nac")
-	private Date fechaNac;
+	@Temporal(TemporalType.DATE)
+	private LocalDate fechaNac;
 	private String dni;
 
 	@ManyToOne
