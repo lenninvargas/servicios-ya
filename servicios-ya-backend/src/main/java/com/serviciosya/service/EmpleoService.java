@@ -1,5 +1,7 @@
 package com.serviciosya.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +32,19 @@ public class EmpleoService {
 	
 	public void eliminarEmpleo(Long id) {
 		repoEmpleo.deleteById(id);
+	}
+	
+	//Listar Empleos
+	public List<Empleo> listarEmpleos(){
+		return repoEmpleo.findAll();
+	}
+	
+	//Registrar Empleos
+	public Empleo registrarEmpleo(Empleo empleo) {
+		return repoEmpleo.save(empleo);
+	}
+	
+	public Empleo buscarEmpleoPorId(Long id) {
+		return repoEmpleo.findById(id).orElse(null);
 	}
 }

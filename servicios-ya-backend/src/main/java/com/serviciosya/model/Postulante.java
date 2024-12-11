@@ -1,5 +1,6 @@
 package com.serviciosya.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -9,6 +10,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Data
@@ -32,6 +35,8 @@ public class Postulante {
     private Boolean estado;
     @Column(name = "precio_propuesta")
     private Double precioPropuesta;
-    private Date fecha;
+    
+    @Temporal(TemporalType.DATE)
+    private LocalDate fecha;
 
 }
