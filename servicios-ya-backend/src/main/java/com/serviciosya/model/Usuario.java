@@ -56,4 +56,7 @@ public class Usuario {
 			joinColumns = @JoinColumn(name = "id_usuario",  nullable = false),
 			inverseJoinColumns = @JoinColumn(name = "id_habilidad", nullable = false))
 	private List<Habilidad> habilidades;
+	
+	@Column(name = "tipo_usuario", insertable = false, updatable = false)
+    private String tipoUsuario;
 }

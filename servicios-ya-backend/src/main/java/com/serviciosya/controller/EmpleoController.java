@@ -23,7 +23,7 @@ public class EmpleoController {
 
 	@Autowired
 	private EmpleoService empleoService;
-	
+
 	@PutMapping("/{id}")
 	public ResponseEntity<?> actualizarEmpleo(@RequestBody Empleo empleo, @PathVariable Long id) {
 		try {
@@ -32,10 +32,10 @@ public class EmpleoController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
 		}
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> eliminarEmpleo(@PathVariable Long id) {
-		if(empleoService.buscarEmpleoPorId(id) != null) {
+		if (empleoService.buscarEmpleoPorId(id) != null) {
 			empleoService.eliminarEmpleo(id);
 			return ResponseEntity.status(HttpStatus.OK).body("Empleo eliminado");
 		} else {
@@ -44,33 +44,33 @@ public class EmpleoController {
 	}
 
 	@GetMapping
-	public ResponseEntity<?> obtenerEmpleos(){
-		List<Empleo> empleos =  empleoService.listarEmpleos();
-		if(empleos.isEmpty()){
+	public ResponseEntity<?> obtenerEmpleos() {
+		List<Empleo> empleos = empleoService.listarEmpleos();
+		if (empleos.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lista Vacia");
-		}else {
+		} else {
 			return ResponseEntity.ok(empleos);
 		}
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<?> agregaEmpleo(@RequestBody Empleo empleo){		
+	public ResponseEntity<?> agregaEmpleo(@RequestBody Empleo empleo) {
 		try {
 			Empleo empleoGrabado = empleoService.registrarEmpleo(empleo);
 			return ResponseEntity.ok(empleoGrabado);
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al agregar nuevo empleo");
 		}
 	}
-	
+
 	@GetMapping("/filter/{id}")
-	public ResponseEntity<?> filtradoPorId(@PathVariable Long id){
-		try {
-			Empleo empleoPorId = empleoService.buscarEmpleoPorId(id);			
-			return ResponseEntity.ok(empleoPorId);
-		}catch(Exception ex) {			
+	public ResponseEntity<?> filtradoPorId(@PathVariable Long id) {
+		Empleo empleoPorId = empleoService.buscarEmpleoPorId(id);
+
+		if (empleoPorId == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Empleo no encontrado");
-		}		
-		
+		} else {
+			return ResponseEntity.ok(empleoPorId);
+		}
 	}
 }
