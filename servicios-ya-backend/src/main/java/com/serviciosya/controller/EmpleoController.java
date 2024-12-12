@@ -56,10 +56,26 @@ public class EmpleoController {
 		
 	}
 	
-	@GetMapping("/filtrer/{id}")
+	@GetMapping("/filter/{id}")
 	public ResponseEntity<?> filtradoPorId(@PathVariable Long id){
 		
-		try {
+		Empleo empleoPorId = empleoService.buscarEmpleoPorId(id);
+		
+		
+		if(empleoPorId == null) {
+			
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Empleo no encontrado");
+		}else {
+			
+			return ResponseEntity.ok(empleoPorId);
+			
+		}
+		
+		
+		
+		
+		
+		/*try {
 			
 			Empleo empleoPorId = empleoService.buscarEmpleoPorId(id);
 			
@@ -67,9 +83,11 @@ public class EmpleoController {
 			
 		}catch(Exception ex) {
 			
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Empleo no encontrado");
+			
 		}
 		
+		
+	*/
 		
 	}
 	
