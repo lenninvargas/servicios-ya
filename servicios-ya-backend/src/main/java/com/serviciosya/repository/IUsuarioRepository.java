@@ -7,5 +7,5 @@ import com.serviciosya.model.Usuario;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Long>{
-
+    Usuario findByEmail(String email);
 }
