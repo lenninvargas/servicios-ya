@@ -12,6 +12,6 @@ import lombok.ToString;
 @Entity
 @DiscriminatorValue("Empleado")
 public class Empleado extends Usuario{
-	
-	private double calificacion;
+
+	private Double calificacion;
 }
