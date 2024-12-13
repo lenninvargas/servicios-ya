@@ -1,7 +1,12 @@
 package com.serviciosya.service;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
+import com.serviciosya.model.PostulanteId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +21,7 @@ import com.serviciosya.repository.IUsuarioRepository;
 public class PostulanteService {
 
 	@Autowired
-	private IPostulanteRepository repoPostulante;
+	private IPostulanteRepository repoPostulacion;
 	
 	@Autowired
 	private IEmpleoRepository repoEmpleo;
@@ -33,6 +38,50 @@ public class PostulanteService {
 			postulante.setIdUsuario(usuario);
 		}
 		
-		return repoPostulante.save(postulante);
+		return repoPostulacion.save(postulante);
+	}
+	/*public List<Postulante> listarPostulantesPorEmpleo(Long idEmpleo) {
+		Empleo empleo = repoEmpleo.findById(idEmpleo).orElse(null);
+		if (empleo == null) {
+			throw new IllegalArgumentException("El empleo con ID " + idEmpleo + " no existe");
+		}
+
+		return repoPostulante.findByIdEmpleo_Id(idEmpleo);
+	} */
+
+	public List<Empleo> obtenerEmpleosPostuladosPorEmpleado(Long idUsuario) {
+		Usuario usuario = repoUsuario.findById(idUsuario).orElse(null);
+
+		if (usuario == null) {
+			throw new IllegalArgumentException("El usuario con ID " + idUsuario + " no existe.");
+		}
+		if ("Empleado".equals(usuario.getTipoUsuario())) {
+			List<Postulante> postulaciones = repoPostulacion.findByIdUsuario_Id(idUsuario);
+
+			if (postulaciones != null && !postulaciones.isEmpty()) {
+				return postulaciones.stream()
+						.map(Postulante::getIdEmpleo)
+						.collect(Collectors.toList());
+			}
+			return Collections.emptyList();
+		}
+		return null;
+	}
+
+	public Postulante obtenerPostulacionPorId(Long idUsuario, Long idEmpleo) {
+		PostulanteId postulanteId = new PostulanteId(idUsuario, idEmpleo);
+		return repoPostulacion.findById(postulanteId).orElse(null);
+	}
+
+	public Postulante editarEstado(Long idUsuario, Long idEmpleo, Boolean nuevoEstado) {
+		PostulanteId postulanteId = new PostulanteId(idUsuario, idEmpleo);
+
+		Postulante postulacion = repoPostulacion.findById(postulanteId).orElse(null);
+
+		if (postulacion != null) {
+			postulacion.setEstado(nuevoEstado);
+			return repoPostulacion.save(postulacion);
+		}
+		return null;
 	}
 }

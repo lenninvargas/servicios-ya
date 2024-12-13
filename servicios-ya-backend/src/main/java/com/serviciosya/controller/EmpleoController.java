@@ -5,23 +5,37 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.serviciosya.model.Empleo;
 import com.serviciosya.service.EmpleoService;
 
 @RestController
-@RequestMapping("/jobs")
+@RequestMapping("/empleo")
 public class EmpleoController {
 	
 	@Autowired
 	private EmpleoService empleoService;
-	
+
+	@PutMapping("/{id}")
+	public ResponseEntity<?> actualizarEmpleo(@RequestBody Empleo empleo, @PathVariable Long id) {
+		try {
+			return ResponseEntity.ok(empleoService.actualizarEmpleo(empleo, id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
+		}
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> eliminarEmpleo(@PathVariable Long id) {
+		if (empleoService.buscarEmpleoPorId(id) != null) {
+			empleoService.eliminarEmpleo(id);
+			return ResponseEntity.status(HttpStatus.OK).body("Empleo eliminado");
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe el empleo que solicitó");
+		}
+	}
+
 	@GetMapping
 	public ResponseEntity<?> obtenerEmpleos(){
 		
@@ -71,28 +85,6 @@ public class EmpleoController {
 			
 		}
 		
-		
-		
-		
-		
-		/*try {
-			
-			Empleo empleoPorId = empleoService.buscarEmpleoPorId(id);
-			
-			return ResponseEntity.ok(empleoPorId);
-			
-		}catch(Exception ex) {
-			
-			
-		}
-		
-		
-	*/
-		
 	}
-	
-	
-	
-	
 
 }
