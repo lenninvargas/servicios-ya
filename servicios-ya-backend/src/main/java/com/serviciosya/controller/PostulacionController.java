@@ -1,7 +1,7 @@
 package com.serviciosya.controller;
 
 import com.serviciosya.model.Empleo;
-import com.serviciosya.model.Usuario;
+//import com.serviciosya.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

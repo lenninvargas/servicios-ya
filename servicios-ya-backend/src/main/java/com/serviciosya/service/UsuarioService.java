@@ -28,9 +28,9 @@ public class UsuarioService {
     public Usuario crearUsuarioDesdeDTO(UsuarioDTO usuarioDTO) {
         Usuario usuario;
         if (usuarioDTO.getTipoUsuario().equalsIgnoreCase("Empleado")) {
-            Empleado empleado = new Empleado();
-            empleado.setCalificacion(usuarioDTO.getCalificacion());
-            usuario = empleado;
+            //Empleado empleado = new Empleado();
+            //empleado.setCalificacion(usuarioDTO.getCalificacion());
+            usuario = new Empleado();
         } else if (usuarioDTO.getTipoUsuario().equalsIgnoreCase("Empleador")) {
             usuario = new Empleador();
         } else {
