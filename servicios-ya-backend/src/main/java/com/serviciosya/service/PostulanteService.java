@@ -3,7 +3,7 @@ package com.serviciosya.service;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+//import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.serviciosya.model.PostulanteId;
@@ -30,8 +30,9 @@ public class PostulanteService {
 	private IUsuarioRepository repoUsuario;
 	
 	public Postulante registrarPostulacion (Postulante postulante) {
-		Usuario usuario = repoUsuario.findById(postulante.getIdUsuario().getId()).orElse(null);
 		Empleo empleo = repoEmpleo.findById(postulante.getIdEmpleo().getId()).orElse(null);
+		Usuario usuario = repoUsuario.findById(postulante.getIdUsuario().getId()).orElse(null);
+		
 		if (usuario.getTipoUsuario() != "Empleador") {
 			postulante.setFecha(LocalDate.now());
 			postulante.setIdEmpleo(empleo);
