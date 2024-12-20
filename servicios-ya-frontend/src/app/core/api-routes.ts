@@ -1,5 +1,8 @@
-export const API_ROUTES = {
-  BASE_URL: 'http://localhost:8080',
+export const BASE_URL = 'http://localhost:8080';
 
-  TEST: '/test',
-};
+export const AUTH = '/auth';
+export const LOGIN = '/login';
+export const REGISTER = '/register';
+
+export const HABILIDAD = '/habilidad';
+export const PAIS = '/country';
