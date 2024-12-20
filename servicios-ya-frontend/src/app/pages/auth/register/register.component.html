@@ -1,0 +1,69 @@
+<form (ngSubmit)="register()" class="container mt-5 p-4">
+    <div class="d-flex gap-3">
+        <div class="form-group w-100">
+            <label for="nombre">Nombre:</label>
+            <input [(ngModel)]="nuevoUsuario.nombre" id="nombre" name="nombre" type="text" class="form-control">
+        </div>
+        <div class="form-group w-100">
+            <label for="apellidoPat">Apellido Paterno:</label>
+            <input id="apellidoPat" name="apellidoPat" [(ngModel)]="nuevoUsuario.apellidoPat" type="text"
+                class="form-control">
+        </div>
+    </div>
+    <div class="d-flex gap-3">
+        <div class="form-group w-100">
+            <label for="apellidoMat">Apellido Materno:</label>
+            <input id="apellidoMat" name="apellidoMat" [(ngModel)]="nuevoUsuario.apellidoMat" type="text"
+                class="form-control">
+        </div>
+        <div class="form-group w-100">
+            <label for="fechaNac">Fecha de Nacimiento:</label>
+            <input id="fechaNac" name="fechaNac" [(ngModel)]="nuevoUsuario.fechaNac" type="date" class="form-control">
+        </div>
+    </div>
+    <div class="d-flex gap-3">
+        <div class="form-group w-100">
+            <label for="dni">DNI:</label>
+            <input id="dni" name="dni" [(ngModel)]="nuevoUsuario.dni" type="text" class="form-control">
+        </div>
+        <div class="form-group w-100">
+            <label for="pais">País:</label>
+            <select id="pais" name="pais" class="form-select" [(ngModel)]="nuevoUsuario.pais">
+                <option selected value="0">Seleccione...</option>
+                <option *ngFor="let pais of paises" [value]="pais.id">{{pais.nombre}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="d-flex gap-3">
+        <div class="form-group w-100">
+            <label for="email">Email:</label>
+            <input id="email" name="email" [(ngModel)]="nuevoUsuario.email" type="email" class="form-control">
+        </div>
+        <div class="form-group w-100">
+            <label for="password">Contraseña:</label>
+            <input id="password" name="password" [(ngModel)]="nuevoUsuario.password" type="password"
+                class="form-control">
+        </div>
+    </div>
+    <div class="d-flex gap-3">
+        <div class="form-group w-100">
+            <label for="habilidades">Habilidades:</label>
+            <select id="habilidades" name="habilidades" class="form-select" [(ngModel)]="nuevoUsuario.habilidades" multiple>
+                <option *ngFor="let habilidad of habilidades" [value]="habilidad.id">{{habilidad.nombre}}</option>
+            </select>
+        </div>
+        <div class="form-group w-100">
+            <label for="tipoUsuario">Tipo de Usuario:</label>
+            <input id="tipoUsuario" name="tipoUsuario" [(ngModel)]="nuevoUsuario.tipoUsuario" type="text"
+                class="form-control">
+        </div>
+    </div>
+    <div class="d-flex gap-3">
+        <div class="form-group w-100">
+            <label for="calificacion">Calificación:</label>
+            <input id="calificacion" name="calificacion" [(ngModel)]="nuevoUsuario.calificacion" type="number"
+                step="0.1" class="form-control">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+</form>
