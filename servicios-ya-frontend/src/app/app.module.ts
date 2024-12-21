@@ -15,6 +15,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { ActualizarEmpleoComponent } from './pages/actualizar-empleo/actualizar-empleo.component';
+import { EditapplicationsComponent } from './pages/applications/editapplications/editapplications/editapplications.component';
+import { ListapplicationsComponent } from './pages/applications/listapplications/listapplications/listapplications.component';
+import { DetailsapplicationsComponent } from './pages/applications/detailsapplications/detailsapplications/detailsapplications.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { ActualizarEmpleoComponent } from './pages/actualizar-empleo/actualizar-
     LoginComponent,
     RegisterComponent,
     ActualizarEmpleoComponent,
+    ListapplicationsComponent,
+    EditapplicationsComponent,
+    DetailsapplicationsComponent,
   ],
   imports: [
     BrowserModule,

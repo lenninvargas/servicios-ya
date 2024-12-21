@@ -1,0 +1,50 @@
+.container-fluid {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Estilo para el card */
+  .card {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+
+  .text {
+    color: #0A65CC !important;
+  }
+
+  .text-success {
+    color: #283ba7 !important;
+  }
+
+  .text-danger {
+    color: #dc3545 !important;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+
+  .card-body {
+    background-color: #f8f9fa;
+  }
+
+  .card-text {
+    font-size: 1.1rem;
+  }
+
+  i {
+    margin-right: 5px;
+  }

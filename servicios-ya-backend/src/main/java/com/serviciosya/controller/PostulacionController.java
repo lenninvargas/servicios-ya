@@ -16,6 +16,7 @@ import com.serviciosya.service.PostulanteService;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/applications")
 public class PostulacionController {
@@ -78,10 +79,10 @@ public class PostulacionController {
 		}
 	}
 
-	@PutMapping
+	@PutMapping("/{idUsuario}/{idEmpleo}")
 	public ResponseEntity<?> editarEstadoPostulacion(
-			@RequestParam Long idUsuario,
-			@RequestParam Long idEmpleo,
+			@PathVariable  Long idUsuario,
+			@PathVariable  Long idEmpleo,
 			@RequestBody Map<String, Boolean> requestBody) {
 		try {
 			Boolean nuevoEstado = requestBody.get("estado");
