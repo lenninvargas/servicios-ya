@@ -14,9 +14,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
-import { DetailsapplicationsComponent } from './pages/applications/detailsapplications/detailsapplications.component';
-import { EditapplicationsComponent } from './pages/applications/editapplications/editapplications.component';
-import { ListapplicationsComponent } from './pages/applications/listapplications/listapplications.component';
 import { ActualizarEmpleoComponent } from './pages/actualizar-empleo/actualizar-empleo.component';
 
 @NgModule({
@@ -27,9 +24,6 @@ import { ActualizarEmpleoComponent } from './pages/actualizar-empleo/actualizar-
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    DetailsapplicationsComponent,
-    EditapplicationsComponent,
-    ListapplicationsComponent,
     ActualizarEmpleoComponent,
   ],
   imports: [
