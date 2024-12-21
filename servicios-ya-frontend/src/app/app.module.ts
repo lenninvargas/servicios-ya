@@ -18,6 +18,7 @@ import { ActualizarEmpleoComponent } from './pages/actualizar-empleo/actualizar-
 import { EditapplicationsComponent } from './pages/applications/editapplications/editapplications/editapplications.component';
 import { ListapplicationsComponent } from './pages/applications/listapplications/listapplications/listapplications.component';
 import { DetailsapplicationsComponent } from './pages/applications/detailsapplications/detailsapplications/detailsapplications.component';
+import { InfoCardComponent } from './components/info-card/info-card.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { DetailsapplicationsComponent } from './pages/applications/detailsapplic
     ListapplicationsComponent,
     EditapplicationsComponent,
     DetailsapplicationsComponent,
+    InfoCardComponent,
   ],
   imports: [
     BrowserModule,
