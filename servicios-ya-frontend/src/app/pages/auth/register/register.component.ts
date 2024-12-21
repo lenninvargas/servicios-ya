@@ -58,7 +58,7 @@ export class RegisterComponent {
     };
 
     console.log(usuarioParaRegistrar);
-    /*this.registerService.register(usuarioParaRegistrar).subscribe(
+   /* this.registerService.register(usuarioParaRegistrar).subscribe(
       (res: any) => {
         console.log('Registro exitoso', res);
         sessionStorage.setItem('usuario', JSON.stringify(res));
