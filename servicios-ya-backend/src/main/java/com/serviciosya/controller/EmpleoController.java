@@ -12,6 +12,7 @@ import com.serviciosya.service.EmpleoService;
 
 @RestController
 @RequestMapping("/empleo")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EmpleoController {
 	
 	@Autowired
