@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs'; 
-import { Empleo } from '../../../models/empleo';
+import { Observable } from 'rxjs';
+import { TbEmpleo } from '../../../models/tb-empleo';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +11,8 @@ export class PostulanteService {
 
   constructor(private http: HttpClient) {}
 
-  listarEmpleosPorPostulante(id: number): Observable<Empleo[]> {
-    return this.http.get<Empleo[]>(`${this.baseUrl}/postulante/${id}`);
+  listarEmpleosPorPostulante(id: number): Observable<TbEmpleo[]> {
+    return this.http.get<TbEmpleo[]>(`${this.baseUrl}/postulante/${id}`);
   }
 
   obtenerPostulacion(idUsuario: number, idEmpleo: number): Observable<any> {

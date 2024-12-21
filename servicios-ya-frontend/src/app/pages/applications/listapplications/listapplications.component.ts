@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostulanteService } from '../../../core/services/applications/postulante.service';
-import { Empleo } from '../../../models/empleo';
+import { TbEmpleo } from '../../../models/tb-empleo';
 
 @Component({
   standalone: false,
@@ -9,7 +9,7 @@ import { Empleo } from '../../../models/empleo';
   styleUrls: ['./listapplications.component.css'],
 })
 export class ListapplicationsComponent implements OnInit {
-  empleos: Empleo[] = [];
+  empleos: TbEmpleo[] = [];
   idInput: number | null = null;
   mensaje: string = ''; 
 
