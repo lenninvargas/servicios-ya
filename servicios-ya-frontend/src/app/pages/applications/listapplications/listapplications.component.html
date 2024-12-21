@@ -13,9 +13,12 @@
         />
       </div>
   
-      <button class="btn btn-primary" (click)="buscarEmpleosPorPostulante()" [disabled]="!postulanteForm.form.valid">Buscar</button>
+      <button type="button" class="btn btn-primary" (click)="buscarEmpleosPorPostulante()" 
+        [disabled]="!postulanteForm.form.valid">Buscar</button>
     </form>
-  
+    <div *ngIf="mensaje" class="alert alert-warning mt-4">
+      {{ mensaje }}
+    </div>
     <div *ngIf="empleos.length > 0" class="mt-4">
       <h2>Empleos Postulados</h2>   
       <br>

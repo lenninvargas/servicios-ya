@@ -46,7 +46,7 @@ export class EditapplicationsComponent implements OnInit {
             console.log('Estado actualizado:', respuesta);
             this.postulacion.estado = nuevoEstado;  
           },
-          (error) => {
+          (error) => { 
             console.error('Error al actualizar el estado', error);
           }
         );
