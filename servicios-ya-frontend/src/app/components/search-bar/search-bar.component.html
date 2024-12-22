@@ -1,0 +1,9 @@
+<form (ngSubmit)="buscarEmpleo()" class="border d-flex rounded p-2 flex-grow-1 gap-2">
+  <button type="submit" class="btn btn-link text-dark p-0">
+    <img src="icons/search.svg" />
+  </button>
+  <input [(ngModel)]="titulo" name="titulo" class="form-control border-0 w-100" placeholder="Titulo del trabajo..." />
+
+  <button *ngIf="showExtraButton" type="button" class="btn btn-primary w-100" (click)="buscarEmpleo()">Buscar
+    Empleo</button>
+</form>

@@ -47,4 +47,8 @@ public class EmpleoService {
 	public Empleo buscarEmpleoPorId(Long id) {
 		return repoEmpleo.findById(id).orElse(null);
 	}
+
+	public Empleo buscarEmpleoPorTitulo(String titulo) {
+		return repoEmpleo.findEmpleoBytitulo(titulo);
+	}
 }

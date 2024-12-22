@@ -19,6 +19,8 @@ import { EditapplicationsComponent } from './pages/applications/editapplications
 import { ListapplicationsComponent } from './pages/applications/listapplications/listapplications/listapplications.component';
 import { DetailsapplicationsComponent } from './pages/applications/detailsapplications/detailsapplications/detailsapplications.component';
 import { InfoCardComponent } from './components/info-card/info-card.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { InfoCardComponent } from './components/info-card/info-card.component';
     EditapplicationsComponent,
     DetailsapplicationsComponent,
     InfoCardComponent,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,

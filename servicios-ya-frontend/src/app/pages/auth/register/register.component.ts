@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
-import { Habilidad } from '../../../models/Habilidad';
-import { HabilidadService } from '../../../core/services/habilidad.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterService } from '../../../core/services/auth/register.service';
-import { RegisterModel } from '../../../models/RegisterModel';
-import { Pais } from '../../../models/Pais';
+import { HabilidadService } from '../../../core/services/habilidad.service';
 import { PaisService } from '../../../core/services/pais.service';
+import { RegisterModel } from '../../../models/RegisterModel';
 
 @Component({
   selector: 'app-register',
@@ -13,22 +11,21 @@ import { PaisService } from '../../../core/services/pais.service';
   templateUrl: './register.component.html',
   styles: ``,
 })
-export class RegisterComponent {
-  habilidades: Habilidad[] = [];
-  paises: Pais[] = [];
+export class RegisterComponent implements OnInit {
+  habilidades: any[] = [];
+  paises: any[] = [];
 
-  usuario: RegisterModel[] = [];
   nuevoUsuario: RegisterModel = {
     nombre: '',
     apellidoPat: '',
     apellidoMat: '',
     fechaNac: '',
     dni: '',
-    pais: { id: 0 },
+    pais: { id: 1 },
     email: '',
     password: '',
     habilidades: [],
-    tipoUsuario: '',
+    tipoUsuario: 'Empleado',
     calificacion: 0,
   };
 
@@ -50,15 +47,29 @@ export class RegisterComponent {
   }
 
   register() {
+    if (
+      !this.nuevoUsuario.nombre ||
+      !this.nuevoUsuario.apellidoPat ||
+      !this.nuevoUsuario.apellidoMat ||
+      !this.nuevoUsuario.fechaNac ||
+      !this.nuevoUsuario.dni ||
+      !this.nuevoUsuario.email ||
+      !this.nuevoUsuario.password
+    ) {
+      alert('Debe completar todos los campos');
+      return;
+    }
     // Ajustar el objeto para que coincida con lo que espera el backend
-    const usuarioParaRegistrar = {
+    const usuarioParaRegistrar: RegisterModel = {
       ...this.nuevoUsuario,
-      habilidades: this.nuevoUsuario.habilidades.map(id => ({ id })),
+      habilidades: this.nuevoUsuario.habilidades.map(id => ({
+        id: Number(id),
+      })),
       pais: { id: this.nuevoUsuario.pais.id },
     };
 
     console.log(usuarioParaRegistrar);
-   /* this.registerService.register(usuarioParaRegistrar).subscribe(
+    this.registerService.register(usuarioParaRegistrar).subscribe(
       (res: any) => {
         console.log('Registro exitoso', res);
         sessionStorage.setItem('usuario', JSON.stringify(res));
@@ -76,6 +87,6 @@ export class RegisterComponent {
           alert('Error en el registro');
         }
       },
-    );*/
+    );
   }
 }

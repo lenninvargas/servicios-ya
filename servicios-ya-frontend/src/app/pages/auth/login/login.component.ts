@@ -18,7 +18,11 @@ export class LoginComponent {
 
   constructor(private loginService: LoginService, private router: Router) {}
 
-  login() {    
+  login() {
+    if (!this.nuevoUsuario.email || !this.nuevoUsuario.password) {
+      alert('Debe ingresar el email y la contraseña');
+      return;
+    }
     this.loginService.login(this.nuevoUsuario).subscribe(
       (res: any) => {
         console.log('Login exitoso', res);
@@ -30,7 +34,7 @@ export class LoginComponent {
         };
         this.router.navigate(['/']);
       },
-      (error: any) => {        
+      (error: any) => {
         if (error.status === 401) {
           alert(error.error);
         } else {

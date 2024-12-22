@@ -1,4 +1,4 @@
-<div class="offset-2 col-8">
+<div class="offset-2 col-8 pt-5">
     <div class="d-flex gap-5 p-2">
         <div class="w-50 p-4">
             <div class="d-flex flex-column gap-1">
@@ -7,13 +7,7 @@
                     ofertas
                     laborales.</p>
             </div>
-            <div class="border d-flex rounded p-2 flex-grow-1">
-                <a href="#" class="text-decoration-none text-dark py-2">
-                    <img src="icons/search.svg" />
-                </a>
-                <input class="form-control border-0 w-100" placeholder="Titulo del trabajo..." />
-                <button class="btn btn-primary w-100">Buscar Empleo</button>
-            </div>
+            <app-search-bar [showExtraButton]="true" />
         </div>
         <div class="w-50">
             <img src="icons/worker-main.svg" class="img-fluid" />
@@ -21,9 +15,9 @@
     </div>
 
     <div class="d-flex justify-content-around my-5">
-        <ng-container *ngFor="let item of FAKE_DATA">
-            <app-info-card [imageSrc]="item.imageSrc" [count]="item.count" [description]="item.description">
-            </app-info-card>
-        </ng-container>
+        <div *ngFor="let item of FAKE_DATA">
+            <app-info-card [imageSrc]="item.imageSrc" [count]="item.count" [description]="item.description" />
+        </div>
     </div>
+
 </div>
