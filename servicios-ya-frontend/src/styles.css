@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+.text-gray-400 {
+  color: #9199a3;
+}
+.text-gray-500 {
+  color: #767f8c;
+}
+.text-gray-600 {
+  color: #5e6670;
+}
+.text-gray-900 {
+  color: #1a202c;
+}
+
+.bg-gray-900{
+    background-color: #1a202c;
+}
+.bg-black-900{
+    background-color: #18191C;
+}
+.bg-gray{
+  background-color: #F1F2F4;
+}

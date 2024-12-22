@@ -1,0 +1,67 @@
+<div *ngIf="postulacion" class="postulacion-container">
+    <h2>Editar de la Postulación</h2>
+
+    <button class="btn btn-secondary my-4" (click)="volver()">
+      <i class="fas fa-arrow-left"></i> Volver
+    </button>
+  
+    <div class="row">
+      <!-- Card de Postulante -->
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <i class="fa fa-user"></i> Postulante
+          </div>
+          <div class="card-body">
+            <p><strong>Nombre:</strong> {{ postulacion.idUsuario.nombre }} {{ postulacion.idUsuario.apellidoPat }} {{ postulacion.idUsuario.apellidoMat }}</p>
+            <p><strong>Fecha de Nacimiento:</strong> {{ postulacion.idUsuario.fechaNac | date: 'dd/MM/yyyy' }}</p>
+            <p><strong>DNI:</strong> {{ postulacion.idUsuario.dni }}</p>
+            <p><strong>Email:</strong> {{ postulacion.idUsuario.email }}</p>
+            <p><strong>Pais:</strong> {{ postulacion.idUsuario.pais.nombre }}</p>
+            <p><strong>Tipo de Usuario:</strong> {{ postulacion.idUsuario.tipoUsuario }}</p>
+            <p><strong>Habilidades:</strong> 
+              <span *ngFor="let habilidad of postulacion.idUsuario.habilidades">
+                {{ habilidad.nombre }} 
+              </span>
+            </p>
+            <p><strong>Calificación:</strong> {{ postulacion.idUsuario.calificacion || 'No disponible' }}</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Card de Empleo -->
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header bg-success text-white">
+            <i class="fa fa-briefcase"></i> Empleo
+          </div>
+          <div class="card-body">
+            <p><strong>Título del Empleo:</strong> {{ postulacion.idEmpleo.titulo }}</p>
+            <p><strong>Descripción:</strong> {{ postulacion.idEmpleo.descripcion }}</p>
+            <p><strong>Fecha de Publicación:</strong> {{ postulacion.idEmpleo.fechaPublicada | date: 'dd/MM/yyyy' }}</p>
+            <p><strong>Presupuesto:</strong> {{ postulacion.idEmpleo.presupuesto | currency:'USD' }}</p>
+            <p><strong>Habilidad Requerida:</strong> {{ postulacion.idEmpleo.habilidad.nombre }}</p>
+            <p><strong>Empleador:</strong> {{ postulacion.idEmpleo.usuario.nombre }} {{ postulacion.idEmpleo.usuario.apellidoPat }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Detalles de la Postulación -->
+    <div class="detalle mt-3 d-flex flex-column align-items-center text-center">
+        <h3><i class="fa fa-check-circle"></i> Estado de la Postulación</h3>
+        <p><strong>Estado:</strong>
+          <span [ngClass]="{'text-success': postulacion.estado, 'text-danger': !postulacion.estado}">
+            {{ postulacion.estado ? 'Aceptado' : 'Pendiente' }}
+          </span>
+        </p>
+        <p><strong>Fecha de Postulación:</strong> {{ postulacion.fecha | date: 'dd/MM/yyyy' }}</p>
+        <p><strong>Precio Propuesto:</strong> {{ postulacion.precioPropuesta | currency:'USD' }}</p>     
+  
+    <!-- Botón para Cambiar Estado -->
+        <button class="btn btn-primary my-3" (click)="editarEstadoPostulante()">
+            <i class="fa fa-refresh"></i> Cambiar Estado
+        </button>
+    </div> 
+  </div>
+  

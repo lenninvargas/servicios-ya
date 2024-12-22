@@ -1,0 +1,23 @@
+<div class="offset-2 col-8 pt-5">
+    <div class="d-flex gap-5 p-2">
+        <div class="w-50 p-4">
+            <div class="d-flex flex-column gap-1">
+                <h1>Encuentra un empleo <br>que se adapte a tus <br> intereses y habilidades</h1>
+                <p class="small">Nuestra plataforma está diseñada para conectar a trabajadores como tú con las mejores
+                    ofertas
+                    laborales.</p>
+            </div>
+            <app-search-bar [showExtraButton]="true" />
+        </div>
+        <div class="w-50">
+            <img src="icons/worker-main.svg" class="img-fluid" />
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-around my-5">
+        <div *ngFor="let item of FAKE_DATA">
+            <app-info-card [imageSrc]="item.imageSrc" [count]="item.count" [description]="item.description" />
+        </div>
+    </div>
+
+</div>

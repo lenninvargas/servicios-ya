@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  standalone: false,
+
   templateUrl: './footer.component.html',
-  styles: ``
+  styles: ``,
 })
 export class FooterComponent {
-
+  footerText = '@2024 ServiciosYa! - Portal de trabajo';
 }
