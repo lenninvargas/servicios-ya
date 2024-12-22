@@ -1,12 +1,12 @@
 <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="w-100" style="max-width: 800px;">
       <!-- Volver Button -->
-      <button class="btn btn-secondary mb-4" (click)="volver()">
+      <button class="btn btn-secondary my-4" (click)="volver()">
         <i class="fas fa-arrow-left"></i> Volver
       </button>
     
       <!-- Detalles de la Postulación -->
-      <div *ngIf="postulacion" class="mt-4">
+      <div *ngIf="postulacion" class="mt-4 mb-4">
         <h2 class="text-primary mb-4"><i class="fas fa-briefcase"></i> Detalles de la Postulación</h2>
         
         <div *ngIf="postulacion.idEmpleo" class="card shadow-sm">
@@ -40,6 +40,10 @@
           </div>
         </div>
       </div>
+      
+      <button class="btn btn-danger mb-4" [routerLink]="['/editapplications', idUsuario, idEmpleo]">
+        <i class="fas fa-eye"></i> Editar
+      </button>
     </div>
   </div>
     

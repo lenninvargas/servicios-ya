@@ -1,5 +1,9 @@
 <div *ngIf="postulacion" class="postulacion-container">
-    <h2>Detalles de la Postulación</h2>
+    <h2>Editar de la Postulación</h2>
+
+    <button class="btn btn-secondary my-4" (click)="volver()">
+      <i class="fas fa-arrow-left"></i> Volver
+    </button>
   
     <div class="row">
       <!-- Card de Postulante -->
@@ -55,7 +59,7 @@
         <p><strong>Precio Propuesto:</strong> {{ postulacion.precioPropuesta | currency:'USD' }}</p>     
   
     <!-- Botón para Cambiar Estado -->
-        <button class="btn btn-primary mt-3" (click)="editarEstadoPostulante()">
+        <button class="btn btn-primary my-3" (click)="editarEstadoPostulante()">
             <i class="fa fa-refresh"></i> Cambiar Estado
         </button>
     </div> 

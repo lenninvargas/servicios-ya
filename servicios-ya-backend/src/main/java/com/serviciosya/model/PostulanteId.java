@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
 public class PostulanteId implements Serializable{
@@ -17,4 +16,9 @@ public class PostulanteId implements Serializable{
 
     private Long idEmpleo;
     private Long idUsuario;
+
+    public PostulanteId(Long idUsuario, Long idEmpleo) {
+        this.idUsuario = idUsuario;
+        this.idEmpleo = idEmpleo;
+    }
 }
