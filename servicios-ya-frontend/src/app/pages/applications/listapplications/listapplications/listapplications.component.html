@@ -1,20 +1,32 @@
 <div class="container">
-    <form #postulanteForm="ngForm">
-      <div class="form-group">
-        <label for="postulanteId">Ingrese el ID del Postulante:</label>
-        <input
-          type="number"
-          id="postulanteId"
-          class="form-control"
-          [(ngModel)]="idInput"
-          name="postulanteId"
-          placeholder="Ejemplo: 1"
-          required
-        />
-      </div>
+  <form #postulanteForm="ngForm" class="p-4 border rounded shadow-sm bg-light">
+    <div class="form-group mb-3">
+      <label for="postulanteId" class="form-label text-primary">
+        <i class="fas fa-id-card"></i> Ingrese el ID del Postulante:
+      </label>
+      <input
+        type="number"
+        id="postulanteId"
+        class="form-control"
+        [(ngModel)]="idInput"
+        name="postulanteId"
+        placeholder="Ejemplo: 1"
+        required
+      />
+      <small class="form-text text-muted">
+        Por favor, ingrese el ID del postulante para buscar sus empleos.
+      </small>
+    </div>
   
-      <button class="btn btn-primary" (click)="buscarEmpleosPorPostulante()" [disabled]="!postulanteForm.form.valid">Buscar</button>
-    </form>
+    <button
+      class="btn btn-primary w-100"
+      (click)="buscarEmpleosPorPostulante()"
+      [disabled]="!postulanteForm.form.valid"
+    >
+      <i class="fas fa-search"></i> Buscar Empleos
+    </button>
+  </form>
+  
   
     <div *ngIf="empleos.length > 0" class="mt-4">
       <h2>Empleos Postulados</h2>   

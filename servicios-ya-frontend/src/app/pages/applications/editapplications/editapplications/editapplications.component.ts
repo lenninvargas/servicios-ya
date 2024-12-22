@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';  
 import { PostulanteService } from '../../../../core/services/applications/postulante.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class EditapplicationsComponent implements OnInit {
 
   constructor(
     private postulanteService: PostulanteService,
-    private route: ActivatedRoute 
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -53,5 +55,9 @@ export class EditapplicationsComponent implements OnInit {
     } else {
       console.error('Postulación no disponible');
     }
+  }
+
+  volver(): void {
+    this.location.back();  
   }
 }
