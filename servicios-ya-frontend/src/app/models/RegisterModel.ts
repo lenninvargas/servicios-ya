@@ -1,4 +1,3 @@
-import { Pais } from './Pais';
 
 export interface RegisterModel {
   nombre: string;
@@ -9,7 +8,7 @@ export interface RegisterModel {
   pais: { id: number };
   email: string;
   password: string;
-  habilidades: string[];
+  habilidades: { id: number }[];
   tipoUsuario: string;
-  calificacion: number;  
+  calificacion: number;
 }
