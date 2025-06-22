@@ -14,6 +14,10 @@ import { RegisterModel } from '../../../models/RegisterModel';
 export class RegisterComponent implements OnInit {
   habilidades: any[] = [];
   paises: any[] = [];
+  successMessage: string = '';
+  errorMessage: string = '';
+
+  selectedHabilidadId: number | null = null;
 
   nuevoUsuario: RegisterModel = {
     nombre: '',
@@ -33,60 +37,48 @@ export class RegisterComponent implements OnInit {
     private habilidadService: HabilidadService,
     private paisService: PaisService,
     private registerService: RegisterService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.habilidadService.listar().subscribe(data => {
-      this.habilidades = data;
-    });
+    this.habilidadService.listar().subscribe(data => this.habilidades = data);
+    this.paisService.listar().subscribe(data => this.paises = data);
+  }
 
-    this.paisService.listar().subscribe(data => {
-      this.paises = data;
-    });
+  selectUsuarioTipo(tipo: 'Empleado'|'Empleador') {
+    this.nuevoUsuario.tipoUsuario = tipo;
+    if (tipo === 'Empleador') {
+      this.nuevoUsuario.habilidades = [];
+      this.nuevoUsuario.calificacion = 0;
+    }
   }
 
   register() {
-    if (
-      !this.nuevoUsuario.nombre ||
-      !this.nuevoUsuario.apellidoPat ||
-      !this.nuevoUsuario.apellidoMat ||
-      !this.nuevoUsuario.fechaNac ||
-      !this.nuevoUsuario.dni ||
-      !this.nuevoUsuario.email ||
-      !this.nuevoUsuario.password
-    ) {
-      alert('Debe completar todos los campos');
-      return;
-    }
-    // Ajustar el objeto para que coincida con lo que espera el backend
-    const usuarioParaRegistrar: RegisterModel = {
+    const payload: RegisterModel = {
       ...this.nuevoUsuario,
-      habilidades: this.nuevoUsuario.habilidades.map(id => ({
-        id: Number(id),
-      })),
       pais: { id: this.nuevoUsuario.pais.id },
+      habilidades:
+        this.nuevoUsuario.tipoUsuario === 'Empleado' && this.selectedHabilidadId != null
+          ? [{ id: this.selectedHabilidadId }]
+          : [],
     };
 
-    console.log(usuarioParaRegistrar);
-    this.registerService.register(usuarioParaRegistrar).subscribe(
-      (res: any) => {
-        console.log('Registro exitoso', res);
+    if (payload.tipoUsuario === 'Empleador') {
+      delete (payload as any).habilidades;
+      delete (payload as any).calificacion;
+    }
+
+    this.registerService.register(payload).subscribe(
+      res => {
         sessionStorage.setItem('usuario', JSON.stringify(res));
-        this.router.navigate(['/']);
+        this.successMessage = '¡Registro exitoso! Bienvenido(a).';
+        setTimeout(() => this.successMessage = '', 4000);
+        setTimeout(() => this.router.navigate(['/']), 1500);
       },
-      (error: any) => {
-        if (error.status === 400) {
-          console.log(error.error);
-          alert('Error: ' + error.error.message);
-        } else if (error.status === 500) {
-          alert('Error interno del servidor: ' + error.error);
-        } else if (error.status === 401) {
-          alert('No autorizado: ' + error.error);
-        } else {
-          alert('Error en el registro');
-        }
-      },
+      err => {
+        this.errorMessage = 'Hubo un error al registrar: ' + (err.error || err.statusText);
+        setTimeout(() => this.errorMessage = '', 4000);
+      }
     );
   }
 }

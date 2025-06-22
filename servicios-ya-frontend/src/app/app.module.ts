@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgSelectModule } from '@ng-select/ng-select';
 import {
   BrowserModule,
   provideClientHydration,
@@ -7,7 +8,7 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -43,6 +44,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgSelectModule,
   ],
   providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],
