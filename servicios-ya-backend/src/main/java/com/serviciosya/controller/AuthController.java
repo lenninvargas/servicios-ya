@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     @Autowired
@@ -37,4 +37,15 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
         }
     }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<?> getUsuarioByEmail(@PathVariable String email) {
+        Usuario usuario = usuarioService.findUsuarioByEmail(email); 
+        if (usuario != null) {
+            return ResponseEntity.ok(usuarioService.convertirADTO(usuario));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
