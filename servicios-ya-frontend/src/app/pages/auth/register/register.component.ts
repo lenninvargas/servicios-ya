@@ -37,6 +37,8 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
+  
     this.habilidadService.listar().subscribe(data => {
       this.habilidades = data;
     });

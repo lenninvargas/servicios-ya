@@ -1,0 +1,40 @@
+<div class="search-bar">
+  <input
+    type="text"
+    placeholder="Busca por Empleo..."
+    [(ngModel)]="filtro"
+    name="busqueda"
+  />
+  <button class="buscar" (click)="buscarPorHabilidad()">Buscar Empleo</button>
+</div>
+<div class="grid">
+  <div class="card" *ngFor="let usuario of usuariosPaginados">
+    <h3>{{ usuario.habilidades[0]?.nombre }}</h3>
+    <div class="autor">
+      <img
+        [src]="'https://cdn-icons-png.flaticon.com/512/149/149071.png'"
+        alt="Foto de perfil"
+        class="img-perfil"
+      />
+      <div class="info">
+        <strong>{{ usuario.nombre }} {{ usuario.apellidoPat }} {{ usuario.apellidoMat }}</strong>
+        <p>{{ usuario.pais?.nombre }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="pagination mt-4">
+  <button (click)="paginaAnterior()" [disabled]="paginaActual === 1">&lt;</button>
+
+  <button
+    *ngFor="let pagina of paginas()"
+    [class.active]="pagina === paginaActual"
+    (click)="cambiarPagina(pagina)"
+  >
+    {{ pagina }}
+  </button>
+
+  <button (click)="paginaSiguiente()" [disabled]="paginaActual === paginas().length">&gt;</button>
+</div>

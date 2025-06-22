@@ -5,6 +5,9 @@ import com.serviciosya.model.Empleado;
 import com.serviciosya.model.Empleador;
 import com.serviciosya.model.Usuario;
 import com.serviciosya.repository.IUsuarioRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +40,9 @@ public class UsuarioService {
             throw new IllegalArgumentException("Tipo de usuario no reconocido");
         }
         return usuario;
+    }
+    
+    public List<Usuario> listarUsuarios(){
+    	return usuarioRepository.findAll();
     }
 }

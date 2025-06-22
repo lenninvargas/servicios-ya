@@ -20,6 +20,7 @@ import { ListapplicationsComponent } from './pages/applications/listapplications
 import { DetailsapplicationsComponent } from './pages/applications/detailsapplications/detailsapplications/detailsapplications.component';
 import { InfoCardComponent } from './components/info-card/info-card.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { EmpleadosListaComponent } from './pages/empleados-lista/empleados-lista.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     DetailsapplicationsComponent,
     InfoCardComponent,
     SearchBarComponent,
+    EmpleadosListaComponent,
   ],
   imports: [
     BrowserModule,

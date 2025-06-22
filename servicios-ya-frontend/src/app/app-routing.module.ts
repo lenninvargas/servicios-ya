@@ -7,6 +7,7 @@ import { ActualizarEmpleoComponent } from './pages/actualizar-empleo/actualizar-
 import { ListapplicationsComponent } from './pages/applications/listapplications/listapplications/listapplications.component';
 import { DetailsapplicationsComponent } from './pages/applications/detailsapplications/detailsapplications/detailsapplications.component';
 import { EditapplicationsComponent } from './pages/applications/editapplications/editapplications/editapplications.component';
+import { EmpleadosListaComponent } from './pages/empleados-lista/empleados-lista.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'postulante', component: ListapplicationsComponent},
   { path: 'postulacion/:idUsuario/:idEmpleo', component: DetailsapplicationsComponent },
   { path: 'editapplications/:idUsuario/:idEmpleo', component: EditapplicationsComponent },
+  {path: 'empleadosLista', component: EmpleadosListaComponent},
   { path : '**', redirectTo : '', pathMatch : 'full'}
 ];
 
