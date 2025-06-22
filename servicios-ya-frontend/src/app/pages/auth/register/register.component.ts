@@ -71,8 +71,11 @@ export class RegisterComponent implements OnInit {
     console.log(usuarioParaRegistrar);
     this.registerService.register(usuarioParaRegistrar).subscribe(
       (res: any) => {
+        const token = res.headers.get('Authorization');
+        const usuario = res.body;
         console.log('Registro exitoso', res);
-        sessionStorage.setItem('usuario', JSON.stringify(res));
+        localStorage.setItem('jwt', token || '');
+        sessionStorage.setItem('usuario', JSON.stringify(usuario));
         this.router.navigate(['/']);
       },
       (error: any) => {

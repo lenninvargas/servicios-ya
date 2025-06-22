@@ -2,6 +2,7 @@ package com.serviciosya.service;
 
 import com.serviciosya.DTO.EmpleadoDTO;
 import com.serviciosya.DTO.EmpleadorDTO;
+import com.serviciosya.DTO.SecurityDTO;
 import com.serviciosya.model.Empleado;
 import com.serviciosya.model.Empleador;
 import com.serviciosya.model.Habilidad;
@@ -64,5 +65,19 @@ public class UsuarioService {
         usuario.setEmail(email);
         usuario.setPassword(password);
         usuario.setPais(pais);
+    }
+
+    // Metodos para la autenticación
+    public Usuario findUsuarioByEmail(String email) {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        return usuario;
+    }
+
+    public SecurityDTO convertirADTO(Usuario usuario) {
+        SecurityDTO dto = new SecurityDTO();
+        dto.setEmail(usuario.getEmail());
+        dto.setPassword(usuario.getPassword());
+        dto.setTipoUsuario(usuario.getTipoUsuario());
+        return dto;
     }
 }

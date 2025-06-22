@@ -25,9 +25,11 @@ export class LoginComponent {
     }
     this.loginService.login(this.nuevoUsuario).subscribe(
       (res: any) => {
-        console.log('Login exitoso', res);
+        const token = res.headers.get('Authorization');
+        const usuario = res.body;
         // Guardar los datos del usuario en sessionStorage
-        sessionStorage.setItem('usuario', JSON.stringify(res));
+        localStorage.setItem('jwt', token || '');
+        sessionStorage.setItem('usuario', JSON.stringify(usuario));
         this.nuevoUsuario = {
           email: '',
           password: '',

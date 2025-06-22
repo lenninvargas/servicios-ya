@@ -20,6 +20,8 @@ import { ListapplicationsComponent } from './pages/applications/listapplications
 import { DetailsapplicationsComponent } from './pages/applications/detailsapplications/detailsapplications/detailsapplications.component';
 import { InfoCardComponent } from './components/info-card/info-card.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 
 @NgModule({
@@ -44,7 +46,13 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [provideClientHydration(withEventReplay())],
+  providers: [provideClientHydration(withEventReplay()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
