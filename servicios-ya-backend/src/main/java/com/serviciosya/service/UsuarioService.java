@@ -1,21 +1,29 @@
 package com.serviciosya.service;
 
-import com.serviciosya.DTO.UsuarioDTO;
+import com.serviciosya.DTO.EmpleadoDTO;
+import com.serviciosya.DTO.EmpleadorDTO;
 import com.serviciosya.model.Empleado;
 import com.serviciosya.model.Empleador;
+import com.serviciosya.model.Habilidad;
+import com.serviciosya.model.Pais;
 import com.serviciosya.model.Usuario;
+import com.serviciosya.repository.IHabilidadRepository;
 import com.serviciosya.repository.IUsuarioRepository;
+
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService {
+	
     @Autowired
     private IUsuarioRepository usuarioRepository;
-
-    public Usuario registrarUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
+    
+    @Autowired
+    private IHabilidadRepository habilidadRepository;
 
     public Usuario login(String email, String password) {
         Usuario usuario = usuarioRepository.findByEmail(email);
@@ -24,18 +32,37 @@ public class UsuarioService {
         }
         return usuario;
     }
+    
+    public Empleado registrarEmpleado(EmpleadoDTO dto) {
+        Empleado empleado = new Empleado();
+        mapDatosComunes(empleado, dto.getNombre(), dto.getApellidoPat(), dto.getApellidoMat(),
+                        dto.getFechaNac(), dto.getDni(), dto.getEmail(), dto.getPassword(), dto.getPais());
 
-    public Usuario crearUsuarioDesdeDTO(UsuarioDTO usuarioDTO) {
-        Usuario usuario;
-        if (usuarioDTO.getTipoUsuario().equalsIgnoreCase("Empleado")) {
-            //Empleado empleado = new Empleado();
-            //empleado.setCalificacion(usuarioDTO.getCalificacion());
-            usuario = new Empleado();
-        } else if (usuarioDTO.getTipoUsuario().equalsIgnoreCase("Empleador")) {
-            usuario = new Empleador();
-        } else {
-            throw new IllegalArgumentException("Tipo de usuario no reconocido");
+        if (dto.getHabilidadesIds() != null) {
+            List<Habilidad> habilidades = habilidadRepository.findAllById(dto.getHabilidadesIds());
+            empleado.setHabilidades(habilidades);
         }
-        return usuario;
+
+        return usuarioRepository.save(empleado);
+    }
+    
+    public Empleador registrarEmpleador(EmpleadorDTO dto) {
+        Empleador empleador = new Empleador();
+        mapDatosComunes(empleador, dto.getNombre(), dto.getApellidoPat(), dto.getApellidoMat(),
+                        dto.getFechaNac(), dto.getDni(), dto.getEmail(), dto.getPassword(), dto.getPais());
+
+        return usuarioRepository.save(empleador);
+    }
+
+    private void mapDatosComunes(Usuario usuario, String nombre, String apellidoPat, String apellidoMat,
+                                  LocalDate fechaNac, String dni, String email, String password, Pais pais) {
+        usuario.setNombre(nombre);
+        usuario.setApellidoPat(apellidoPat);
+        usuario.setApellidoMat(apellidoMat);
+        usuario.setFechaNac(fechaNac);
+        usuario.setDni(dni);
+        usuario.setEmail(email);
+        usuario.setPassword(password);
+        usuario.setPais(pais);
     }
 }
