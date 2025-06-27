@@ -1,0 +1,32 @@
+<div class="detalle-empleo-container">
+    <div class="detalle-header">
+        <img src="icons/logoEmpresa.jpg" alt="Logo" />
+        <div>
+            <h2>{{ empleo.titulo }}</h2>
+            <p class="detalle-subtitulo">Habilidad: {{ empleo.habilidad?.nombre }}</p>
+        </div>
+        <button class="btn-aplicar" [routerLink]="['/postulacion', empleo.usuario?.id, empleo.id]">Aplicar Ahora →</button>
+    </div>
+
+    <div class="detalle-body">
+        <div class="detalle-descripcion">
+            <h3>Descripción del Trabajo</h3>
+            <p>{{ empleo.descripcion }}</p>
+        </div>
+
+        <div class="detalle-sidebar">
+            <div class="detalle-card">
+                <p class="detalle-label">Presupuesto</p>
+                <p class="detalle-salario">S/ {{ empleo.presupuesto }}</p>
+            </div>
+            <div class="detalle-card">
+                <p class="detalle-label">Ubicación</p>
+                <p class="detalle-ubicacion">{{ empleo.usuario?.pais?.nombre }}</p>
+            </div>
+            <div class="detalle-card">
+                <p class="detalle-label">Fecha Publicada</p>
+                <p class="detalle-ubicacion">{{ empleo.fechaPublicada }}</p>
+            </div>
+        </div>
+    </div>
+</div>

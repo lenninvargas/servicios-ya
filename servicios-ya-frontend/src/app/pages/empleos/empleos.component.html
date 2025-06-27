@@ -1,0 +1,19 @@
+<app-search-bar class="w-100 ms-3" />
+
+<div class="empleo-card" *ngFor="let empleo of empleos">
+    <div class="empleo-icono">
+        <img src="icons/logoEmpresa.jpg" alt="Logo" />
+    </div>
+    <div class="empleo-info">
+        <h3>{{ empleo.titulo }}</h3>
+        <span class="tag">Full Time</span>
+        <p>🌍 {{ empleo.usuario.pais.nombre }}</p>
+        <p>💰 ${{ empleo.presupuesto }}</p>
+        <p>{{empleo.habilidad.nombre}}</p>
+        <p>{{ empleo.descripcion | slice:0:100 }}...</p>
+        <p>⏳ {{ empleo.fechaPublicada }} </p>
+    </div>
+    <div class="empleo-accion">
+        <button class="btn-aplicar" [routerLink]="['/empleos', empleo.id]">Apply Now →</button>
+    </div>
+</div>

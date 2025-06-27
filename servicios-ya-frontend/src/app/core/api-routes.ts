@@ -8,3 +8,5 @@ export const REGISTER_EMPLEADOR = '/registrar-empleador';
 
 export const HABILIDAD = '/habilidad';
 export const PAIS = '/country';
+export const EMPLEO = '/empleo';
+export const FILTER = '/filter';
