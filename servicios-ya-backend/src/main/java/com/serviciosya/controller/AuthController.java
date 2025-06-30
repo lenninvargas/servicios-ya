@@ -60,4 +60,6 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al listar usuarios: " + e.getMessage());
         }
     }
+    
+    
 }
