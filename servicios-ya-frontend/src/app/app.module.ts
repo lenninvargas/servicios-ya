@@ -7,7 +7,11 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule, NgSelectOption, ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
+import {
+  FormsModule,
+  NgSelectOption,
+  ReactiveFormsModule,
+} from '@angular/forms'; // Importa ReactiveFormsModule
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -23,7 +27,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { EmpleosComponent } from './pages/empleos/empleos.component';
+import { DetalleEmpleoComponent } from './pages/detalle-empleo/detalle-empleo.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +44,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     DetailsapplicationsComponent,
     InfoCardComponent,
     SearchBarComponent,
+    EmpleosComponent,
+    DetalleEmpleoComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,12 +55,13 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     NgSelectModule,
   ],
-  providers: [provideClientHydration(withEventReplay()),
+  providers: [
+    provideClientHydration(withEventReplay()),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
