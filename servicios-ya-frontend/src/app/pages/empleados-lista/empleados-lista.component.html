@@ -6,7 +6,11 @@
     name="busqueda"
   />
   <button class="buscar" (click)="buscarPorHabilidad()">Buscar Empleo</button>
+
+  <!-- Botón para crear empleo -->
+  <button class="crear-empleo" [routerLink]="['/empleos/crear']"> Crear Empleo</button>
 </div>
+
 <div class="grid">
   <div class="card" *ngFor="let usuario of usuariosPaginados">
     <h3>{{ usuario.habilidades[0]?.nombre }}</h3>
@@ -23,7 +27,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="pagination mt-4">
   <button (click)="paginaAnterior()" [disabled]="paginaActual === 1">&lt;</button>

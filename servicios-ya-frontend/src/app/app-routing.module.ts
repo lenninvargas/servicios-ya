@@ -24,7 +24,6 @@ const routes: Routes = [
   { path: 'postulacion/:idUsuario/:idEmpleo', component: DetailsapplicationsComponent },
   { path: 'editapplications/:idUsuario/:idEmpleo', component: EditapplicationsComponent },
   {path: 'empleadosLista', component: EmpleadosListaComponent},
-  { path : '**', redirectTo : '', pathMatch : 'full'},
 
   { path: 'postulante', component: ListapplicationsComponent },
   {

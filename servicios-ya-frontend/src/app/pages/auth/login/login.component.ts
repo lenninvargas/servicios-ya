@@ -19,30 +19,39 @@ export class LoginComponent {
   constructor(private loginService: LoginService, private router: Router) {}
 
   login() {
-    if (!this.nuevoUsuario.email || !this.nuevoUsuario.password) {
-      alert('Debe ingresar el email y la contraseña');
-      return;
-    }
-    this.loginService.login(this.nuevoUsuario).subscribe(
-      (res: any) => {
-        const token = res.headers.get('Authorization');
-        const usuario = res.body;
-        // Guardar los datos del usuario en sessionStorage
-        localStorage.setItem('jwt', token || '');
-        sessionStorage.setItem('usuario', JSON.stringify(usuario));
-        this.nuevoUsuario = {
-          email: '',
-          password: '',
-        };
-        this.router.navigate(['/']);
-      },
-      (error: any) => {
-        if (error.status === 401) {
-          alert(error.error);
-        } else {
-          alert('Error en el login');
-        }
-      },
-    );
+  if (!this.nuevoUsuario.email || !this.nuevoUsuario.password) {
+    alert('Debe ingresar el email y la contraseña');
+    return;
   }
+
+  this.loginService.login(this.nuevoUsuario).subscribe(
+    (res: any) => {
+      const token = res.headers.get('Authorization');
+      const usuario = res.body;
+
+
+      localStorage.setItem('jwt', token || '');
+      sessionStorage.setItem('usuario', JSON.stringify(usuario));
+
+      this.nuevoUsuario = {
+        email: '',
+        password: '',
+      };
+
+
+      if (usuario.tipoUsuario === 'Empleador') {
+        this.router.navigate(['/empleadosLista']);
+      } else {
+        this.router.navigate(['/']);
+      }
+    },
+    (error: any) => {
+      if (error.status === 401) {
+        alert(error.error);
+      } else {
+        alert('Error en el login');
+      }
+    }
+  );
+}
 }

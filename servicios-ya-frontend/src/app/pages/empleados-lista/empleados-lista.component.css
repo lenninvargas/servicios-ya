@@ -100,3 +100,16 @@
   background: #ccc;
   cursor: not-allowed;
 }
+
+.crear-empleo {
+  margin-left: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.crear-empleo:hover {
+  background-color: #218838;
+}
