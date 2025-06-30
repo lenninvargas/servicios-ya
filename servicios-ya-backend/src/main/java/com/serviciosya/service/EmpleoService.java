@@ -48,7 +48,8 @@ public class EmpleoService {
 		return repoEmpleo.findById(id).orElse(null);
 	}
 
-	public Empleo buscarEmpleoPorTitulo(String titulo) {
-		return repoEmpleo.findEmpleoBytitulo(titulo);
+	public List<Empleo> buscarEmpleosPorTituloParcial(String titulo) {
+		if (titulo == null) return List.of();
+		return repoEmpleo.buscarPorTituloParcial(titulo);
 	}
 }
