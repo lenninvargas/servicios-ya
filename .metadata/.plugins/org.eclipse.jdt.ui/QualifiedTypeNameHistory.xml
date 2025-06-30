@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="com.serviciosya.DTO.EmpleadorDTO"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="com.serviciosya.model.Pais"/>
+    <fullyQualifiedTypeName name="com.serviciosya.DTO.EmpleadoDTO"/>
+    <fullyQualifiedTypeName name="com.serviciosya.model.Empleado"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.serviciosya.repository.IHabilidadRepository"/>
+    <fullyQualifiedTypeName name="com.serviciosya.model.Habilidad"/>
+</qualifiedTypeNameHistroy>

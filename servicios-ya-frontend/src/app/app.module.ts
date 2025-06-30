@@ -7,7 +7,11 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
+import {
+  FormsModule,
+  NgSelectOption,
+  ReactiveFormsModule,
+} from '@angular/forms'; // Importa ReactiveFormsModule
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -20,8 +24,14 @@ import { ListapplicationsComponent } from './pages/applications/listapplications
 import { DetailsapplicationsComponent } from './pages/applications/detailsapplications/detailsapplications/detailsapplications.component';
 import { InfoCardComponent } from './components/info-card/info-card.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+
 import { EmpleadosListaComponent } from './pages/empleados-lista/empleados-lista.component';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { EmpleosComponent } from './pages/empleos/empleos.component';
+import { DetalleEmpleoComponent } from './pages/detalle-empleo/detalle-empleo.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +47,12 @@ import { EmpleadosListaComponent } from './pages/empleados-lista/empleados-lista
     DetailsapplicationsComponent,
     InfoCardComponent,
     SearchBarComponent,
+
     EmpleadosListaComponent,
+
+    EmpleosComponent,
+    DetalleEmpleoComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -45,8 +60,16 @@ import { EmpleadosListaComponent } from './pages/empleados-lista/empleados-lista
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgSelectModule,
   ],
-  providers: [provideClientHydration(withEventReplay())],
+  providers: [
+    provideClientHydration(withEventReplay()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

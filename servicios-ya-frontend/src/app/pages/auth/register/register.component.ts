@@ -14,6 +14,10 @@ import { RegisterModel } from '../../../models/RegisterModel';
 export class RegisterComponent implements OnInit {
   habilidades: any[] = [];
   paises: any[] = [];
+  successMessage = '';
+  errorMessage = '';
+
+  selectedHabilidadId: number | null = null;
 
   nuevoUsuario: RegisterModel = {
     nombre: '',
@@ -33,62 +37,64 @@ export class RegisterComponent implements OnInit {
     private habilidadService: HabilidadService,
     private paisService: PaisService,
     private registerService: RegisterService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
 
-  
-    this.habilidadService.listar().subscribe(data => {
-      this.habilidades = data;
-    });
 
-    this.paisService.listar().subscribe(data => {
-      this.paises = data;
-    });
+  
+  
+    this.habilidadService.listar().subscribe(data => this.habilidades = data);
+    this.paisService.listar().subscribe(data => this.paises = data);
+  }
+
+
+  selectUsuarioTipo(tipo: 'Empleado' | 'Empleador') {
+    this.nuevoUsuario.tipoUsuario = tipo;
+    if (tipo === 'Empleador') {
+      this.selectedHabilidadId = null;
+      this.nuevoUsuario.calificacion = 0;
+    }
   }
 
   register() {
-    if (
-      !this.nuevoUsuario.nombre ||
-      !this.nuevoUsuario.apellidoPat ||
-      !this.nuevoUsuario.apellidoMat ||
-      !this.nuevoUsuario.fechaNac ||
-      !this.nuevoUsuario.dni ||
-      !this.nuevoUsuario.email ||
-      !this.nuevoUsuario.password
-    ) {
-      alert('Debe completar todos los campos');
-      return;
-    }
-    // Ajustar el objeto para que coincida con lo que espera el backend
-    const usuarioParaRegistrar: RegisterModel = {
-      ...this.nuevoUsuario,
-      habilidades: this.nuevoUsuario.habilidades.map(id => ({
-        id: Number(id),
-      })),
-      pais: { id: this.nuevoUsuario.pais.id },
+    const dto: any = {
+      nombre:      this.nuevoUsuario.nombre,
+      apellidoPat: this.nuevoUsuario.apellidoPat,
+      apellidoMat: this.nuevoUsuario.apellidoMat,
+      fechaNac:    this.nuevoUsuario.fechaNac,
+      dni:         this.nuevoUsuario.dni,
+      pais:        { id: this.nuevoUsuario.pais.id },
+      email:       this.nuevoUsuario.email,
+      password:    this.nuevoUsuario.password,
     };
 
-    console.log(usuarioParaRegistrar);
-    this.registerService.register(usuarioParaRegistrar).subscribe(
-      (res: any) => {
-        console.log('Registro exitoso', res);
-        sessionStorage.setItem('usuario', JSON.stringify(res));
-        this.router.navigate(['/']);
-      },
-      (error: any) => {
-        if (error.status === 400) {
-          console.log(error.error);
-          alert('Error: ' + error.error.message);
-        } else if (error.status === 500) {
-          alert('Error interno del servidor: ' + error.error);
-        } else if (error.status === 401) {
-          alert('No autorizado: ' + error.error);
-        } else {
-          alert('Error en el registro');
-        }
-      },
-    );
+    if (this.nuevoUsuario.tipoUsuario === 'Empleado') {
+      dto.habilidadesIds = this.selectedHabilidadId != null
+        ? [this.selectedHabilidadId]
+        : [];
+      this.registerService.registerEmpleado(dto).subscribe(
+        res => this.handleSuccess(res),
+        err => this.handleError(err)
+      );
+    } else {
+      this.registerService.registerEmpleador(dto).subscribe(
+        res => this.handleSuccess(res),
+        err => this.handleError(err)
+      );
+    }
+  }
+
+  private handleSuccess(res: any) {
+    sessionStorage.setItem('usuario', JSON.stringify(res));
+    this.successMessage = '¡Registro exitoso! Bienvenido(a).';
+    setTimeout(() => this.successMessage = '', 4000);
+    setTimeout(() => this.router.navigate(['/']), 1500);
+  }
+
+  private handleError(err: any) {
+    this.errorMessage = 'Hubo un error al registrar: ' + (err.error || err.statusText);
+    setTimeout(() => this.errorMessage = '', 4000);
   }
 }

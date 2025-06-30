@@ -24,10 +24,11 @@ export class EmpleadosListaComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioService.listar().subscribe((data) => {
-      this.usuarios = data;
-      this.usuariosFiltrados = data; 
-      this.actualizarUsuariosPaginados();
-    });
+    
+    this.usuarios = data.filter((usuario: any) => usuario.tipoUsuario === 'Empleado');
+    this.usuariosFiltrados = [...this.usuarios]; 
+    this.actualizarUsuariosPaginados();
+  });
   }
 
   buscarPorHabilidad() {
@@ -39,7 +40,7 @@ export class EmpleadosListaComponent implements OnInit {
       )
     );
 
-    this.paginaActual = 1; // reinicia a página 1
+    this.paginaActual = 1; 
     this.actualizarUsuariosPaginados();
   }
 

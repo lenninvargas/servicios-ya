@@ -1,61 +1,162 @@
-<form (ngSubmit)="register()" class="offset-3 col-6 mt-5 p-4 border rounded shadow-sm shadow-lg rounded bg-light my-4">
+<div class="offset-3 col-6 mt-5 px-0">
+  <div
+    *ngIf="successMessage"
+    class="alert alert-success alert-dismissible fade show"
+    role="alert"
+  >
+    {{ successMessage }}
+    <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+  </div>
+
+  <div
+    *ngIf="errorMessage"
+    class="alert alert-danger alert-dismissible fade show"
+    role="alert"
+  >
+    {{ errorMessage }}
+    <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+  </div>
+
+  <div class="p-4 border rounded shadow-sm bg-light my-4">
+    <ul class="nav nav-tabs mb-4">
+      <li class="nav-item">
+        <button
+          type="button"
+          class="nav-link"
+          [class.active]="nuevoUsuario.tipoUsuario === 'Empleado'"
+          (click)="selectUsuarioTipo('Empleado')"
+        >
+          Empleado
+        </button>
+      </li>
+      <li class="nav-item">
+        <button
+          type="button"
+          class="nav-link"
+          [class.active]="nuevoUsuario.tipoUsuario === 'Empleador'"
+          (click)="selectUsuarioTipo('Empleador')"
+        >
+          Empleador
+        </button>
+      </li>
+    </ul>
+
     <h3 class="text-center mb-4">Registrar</h3>
-    <div class="d-flex gap-3 mb-3">
-        <div class="form-group w-100">
-            <label for="nombre"><i class="fas fa-user"></i> Nombre:</label>
-            <input [(ngModel)]="nuevoUsuario.nombre" id="nombre" name="nombre" type="text" class="form-control"
-                required>
+    <form (ngSubmit)="register()">
+      <div class="row mb-3">
+        <div class="col">
+          <label for="nombre"><i class="fas fa-user"></i> Nombre:</label>
+          <input
+            [(ngModel)]="nuevoUsuario.nombre"
+            name="nombre"
+            id="nombre"
+            class="form-control"
+            required
+          />
         </div>
-        <div class="form-group w-100">
-            <label for="apellidoPat"><i class="fas fa-user"></i> Apellido Paterno:</label>
-            <input id="apellidoPat" name="apellidoPat" [(ngModel)]="nuevoUsuario.apellidoPat" type="text"
-                class="form-control" required>
+        <div class="col">
+          <label for="apellidoPat"><i class="fas fa-user"></i> Apellido Paterno:</label>
+          <input
+            [(ngModel)]="nuevoUsuario.apellidoPat"
+            name="apellidoPat"
+            id="apellidoPat"
+            class="form-control"
+            required
+          />
         </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label for="apellidoMat"><i class="fas fa-user"></i> Apellido Materno:</label>
+          <input
+            [(ngModel)]="nuevoUsuario.apellidoMat"
+            name="apellidoMat"
+            id="apellidoMat"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="col">
+          <label for="fechaNac"><i class="fas fa-calendar-alt"></i> Fecha de Nacimiento:</label>
+          <input
+            [(ngModel)]="nuevoUsuario.fechaNac"
+            name="fechaNac"
+            id="fechaNac"
+            type="date"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label for="dni"><i class="fas fa-id-card"></i> DNI:</label>
+          <input
+            [(ngModel)]="nuevoUsuario.dni"
+            name="dni"
+            id="dni"
+            type="number"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="col">
+          <label for="pais"><i class="fas fa-globe"></i> País:</label>
+          <select
+            [(ngModel)]="nuevoUsuario.pais.id"
+            name="pais"
+            id="pais"
+            class="form-control"
+            required
+          >
+            <option *ngFor="let p of paises" [value]="p.id">{{ p.nombre }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+          <input
+            [(ngModel)]="nuevoUsuario.email"
+            name="email"
+            id="email"
+            type="email"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="col">
+          <label for="password"><i class="fas fa-lock"></i> Contraseña:</label>
+          <input
+            [(ngModel)]="nuevoUsuario.password"
+            name="password"
+            id="password"
+            type="password"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+
+    <div *ngIf="nuevoUsuario.tipoUsuario === 'Empleado'" class="mb-3">
+    <label for="habilidades"><i class="fas fa-tools"></i> Habilidades:</label>
+        <ng-select
+            [items]="habilidades"
+            bindLabel="nombre"
+            bindValue="id"
+            [(ngModel)]="selectedHabilidadId"
+            name="habilidades"
+            id="habilidades"
+            inputId="habilidades"
+            placeholder="Seleccione una habilidad..."
+            required>
+        </ng-select>
     </div>
-    <div class="d-flex gap-3 mb-3">
-        <div class="form-group w-100">
-            <label for="apellidoMat"><i class="fas fa-user"></i> Apellido Materno:</label>
-            <input id="apellidoMat" name="apellidoMat" [(ngModel)]="nuevoUsuario.apellidoMat" type="text"
-                class="form-control" required>
-        </div>
-        <div class="form-group w-100">
-            <label for="fechaNac"><i class="fas fa-calendar-alt"></i> Fecha de Nacimiento:</label>
-            <input id="fechaNac" name="fechaNac" [(ngModel)]="nuevoUsuario.fechaNac" type="date" class="form-control"
-                required>
-        </div>
-    </div>
-    <div class="d-flex gap-3 mb-3">
-        <div class="form-group w-100">
-            <label for="dni"><i class="fas fa-id-card"></i> DNI:</label>
-            <input id="dni" name="dni" [(ngModel)]="nuevoUsuario.dni" type="number" maxlength="9" min="0"
-                class="form-control" required>
-        </div>
-        <div class=" form-group w-100">
-            <label for="pais"><i class="fas fa-globe"></i> País:</label>
-            <select id="pais" name="pais" [(ngModel)]="nuevoUsuario.pais.id" class="form-control" required>
-                <option *ngFor="let pais of paises" [value]="pais.id">{{ pais.nombre }}</option>
-            </select>
-        </div>
-    </div>
-    <div class="d-flex gap-3 mb-3">
-        <div class="form-group w-100">
-            <label for="email"><i class="fas fa-envelope"></i> Email:</label>
-            <input id="email" name="email" [(ngModel)]="nuevoUsuario.email" type="email" class="form-control" required>
-        </div>
-        <div class="form-group w-100">
-            <label for="password"><i class="fas fa-lock"></i> Contraseña:</label>
-            <input id="password" name="password" [(ngModel)]="nuevoUsuario.password" type="password"
-                class="form-control" required>
-        </div>
-    </div>
-    <div class="d-flex gap-3 mb-3">
-        <div class="form-group w-100">
-            <label for="habilidades"><i class="fas fa-tools"></i> Habilidades:</label>
-            <select id="habilidades" name="habilidades" [(ngModel)]="nuevoUsuario.habilidades" class="form-control"
-                multiple required>
-                <option *ngFor="let habilidad of habilidades" [value]="habilidad.id">{{ habilidad.nombre }}</option>
-            </select>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Registrar</button>
-</form>
+
+      <button type="submit" class="btn btn-primary w-100">Registrar</button>
+    </form>
+  </div>
+</div>  
