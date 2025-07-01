@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
-
+  tipoUsuario: string | null = null;
   constructor(private router: Router) {}
 
   ngOnInit(): void {
@@ -26,8 +26,12 @@ export class NavbarComponent implements OnInit {
 
   checkLoginStatus(): void {
     if (typeof window !== 'undefined' && window.sessionStorage) {
-      const usuario = sessionStorage.getItem('usuario');
-      this.isLoggedIn = usuario !== null;
+      const usuarioStr = sessionStorage.getItem('usuario');
+      if (usuarioStr) {
+        const usuario = JSON.parse(usuarioStr);
+        this.isLoggedIn = true;
+        this.tipoUsuario = usuario.tipoUsuario || null;
+      }
     }
   }
 
@@ -35,6 +39,7 @@ export class NavbarComponent implements OnInit {
     if (typeof window !== 'undefined' && window.sessionStorage) {
       sessionStorage.removeItem('usuario');
       this.isLoggedIn = false;
+      this.tipoUsuario = null;
       this.router.navigate(['/']);
     }
   }

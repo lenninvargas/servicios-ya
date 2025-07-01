@@ -8,13 +8,17 @@ import { PostulanteService } from '../../../../core/services/applications/postul
   styleUrls: ['./listapplications.component.css'],
 })
 export class ListapplicationsComponent implements OnInit {
-  empleos: TbEmpleo[] = [];  
+  empleos: TbEmpleo[] = [];
   idInput: number | null = null;
-  mensaje: string= '';
+  mensaje: string = '';
 
   constructor(private postulanteService: PostulanteService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')!);
+    this.idInput = usuario?.id || null;
+    if (this.idInput) this.buscarEmpleosPorPostulante();
+  }
 
   buscarEmpleosPorPostulante() {
     if (this.idInput === null) {
@@ -23,15 +27,15 @@ export class ListapplicationsComponent implements OnInit {
     }
 
     this.postulanteService.listarEmpleosPorPostulante(this.idInput).subscribe(
-      (data) => {
+      data => {
         console.log('Datos de los empleos postulados:', data);
-        this.empleos = data;  
+        this.empleos = data;
         this.mensaje = '';
       },
-      (error) => {
+      error => {
         this.empleos = [];
-        this.mensaje='Postulante de ID ' + this.idInput + ' no encotrado';
-      }
+        this.mensaje = 'Postulante de ID ' + this.idInput + ' no encotrado';
+      },
     );
   }
 }

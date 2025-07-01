@@ -21,20 +21,23 @@
     </div>
   </div>
 </div>
-
 <nav class="navbar navbar-expand-lg navbar-primary bg-primary px-5">
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item">
+
+      <!-- Mostrar solo si el usuario es tipo EMPLEADO -->
+      <li class="nav-item" *ngIf="tipoUsuario === 'Empleado'">
         <a class="nav-link text-white" routerLink="/postulante">
           <i class="fas fa-file-alt"></i> Postulaciones
         </a>
       </li>
-      <li class="nav-item">
+
+      <li class="nav-item" *ngIf="tipoUsuario === 'Empleado'">
         <a class="nav-link text-white" routerLink="/empleos">
           <i class="fas fa-briefcase"></i> Empleos
         </a>
       </li>
+
     </ul>
   </div>
 </nav>
