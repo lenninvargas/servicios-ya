@@ -29,11 +29,11 @@ public class UsuarioService {
     @Autowired
     private IHabilidadRepository habilidadRepository;
 
-    public Usuario login(String email, String password) {
+    public Usuario login(String email) {
         Usuario usuario = usuarioRepository.findByEmail(email);
-        if (usuario == null || !usuario.getPassword().equals(password)) {
+        /*if (usuario == null || !usuario.getPassword().equals(password)) {
             throw new IllegalArgumentException("Credenciales incorrectas");
-        }
+        }*/
         return usuario;
     }
     

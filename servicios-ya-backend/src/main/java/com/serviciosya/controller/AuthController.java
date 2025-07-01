@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8090")
 public class AuthController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Usuario authenticatedUser = usuarioService.login(loginRequest.getEmail(), loginRequest.getPassword());
+            Usuario authenticatedUser = usuarioService.login(loginRequest.getEmail());
             return ResponseEntity.ok(authenticatedUser);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");

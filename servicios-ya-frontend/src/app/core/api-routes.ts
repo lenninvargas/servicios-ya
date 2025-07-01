@@ -1,5 +1,5 @@
 export const BASE_URL = 'http://localhost:8080';
-export const SECURITY_URL = 'http://localhost:8080';
+export const SECURITY_URL = 'http://localhost:8090';
 
 export const AUTH = '/auth';
 export const LOGIN = '/login';

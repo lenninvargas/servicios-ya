@@ -51,6 +51,7 @@ public class AuthController {
             );
             String token = jwtService.generateToken(userDetails);
             logger.info("Token generado para usuario: {}", usuario.getEmail());
+            logger.info("Rol de usuario: {}", List.of(new SimpleGrantedAuthority("ROLE_" + usuario.getTipoUsuario())));
 
             return ResponseEntity.ok()
                 .header("Authorization", "Bearer " + token)
