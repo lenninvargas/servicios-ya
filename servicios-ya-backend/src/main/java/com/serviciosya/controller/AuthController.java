@@ -32,7 +32,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Usuario authenticatedUser = usuarioService.login(loginRequest.getEmail(), loginRequest.getPassword());
+            Usuario authenticatedUser = usuarioService.login(loginRequest.getEmail());
             return ResponseEntity.ok(authenticatedUser);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
