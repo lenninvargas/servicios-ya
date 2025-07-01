@@ -1,71 +1,42 @@
-<div class="container">
-  <div class="bg-body-secondary py-3">
-    <h5 class="text-center">Actualizar Empleo</h5>
+<div class="container mt-5">
+  <div class="bg-body-secondary py-3 rounded shadow-sm">
+    <h5 class="text-center"><i class="fas fa-edit"></i> {{ modo === 'crear' ? 'Registrar Empleo' : 'Actualizar Empleo'
+      }}</h5>
   </div>
 
-  <form class="py-4" (ngSubmit)="actualizarEmpleo()">
+  <form class="py-4" *ngIf="empleo" (ngSubmit)="onSubmit()">
     <div class="row py-1">
-      <div class="mb-3 col">
-        <label for="id" class="form-label">Id Usuario</label>
-        <input
-          type="text"
-          name="id"
-          [(ngModel)]="modificarEmpleo.usuario.id"
-          class="form-control"
-          id="id"
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div class="mb-3 col">
-        <label for="titulo" class="form-label">Titulo</label>
-        <input
-          type="text"
-          [(ngModel)]="modificarEmpleo.titulo"
-          class="form-control"
-          name="titulo"
-          id="titulo"
-        />
-      </div>
+
     </div>
+    <div class="mb-3 col">
+      <label for="titulo" class="form-label"><i class="fas fa-heading"></i> Titulo</label>
+      <input type="text" [(ngModel)]="empleo.titulo" class="form-control" name="titulo" id="titulo" />
+    </div>
+
 
     <div class="row py-1">
       <div class="mb-3 col">
-        <label for="presupuesto" class="form-label">Presupuesto</label>
-        <input
-          type="number"
-          [(ngModel)]="modificarEmpleo.presupuesto"
-          name="presupuesto"
-          class="form-control"
-          id="presupuesto"
-          aria-describedby="emailHelp"
-        />
+        <label for="presupuesto" class="form-label"><i class="fas fa-dollar-sign"></i> Presupuesto</label>
+        <input type="number" [(ngModel)]="empleo.presupuesto" name="presupuesto" class="form-control" id="presupuesto"
+          aria-describedby="emailHelp" />
       </div>
       <div class="mb-3 col">
-        <label for="habilidad" class="form-label">Habilidad</label>
-        <select
-          class="form-select"
-          name="habilidad"
-          id="habilidad"
-          [(ngModel)]="modificarEmpleo.habilidad.id"
-          aria-label="Default select example"
-        >
-          <option selected value="0">{{modificarEmpleo.habilidad.nombre}}</option>
-          <option>--Cambiar habilidad--</option>
-          <option *ngFor="let habilidad of habilidades"
-           [value]="habilidad.id">{{habilidad.nombre}}</option>
+        <label for="habilidad" class="form-label"><i class="fas fa-tools"></i> Habilidad</label>
+        <select class="form-select" [(ngModel)]="empleo.habilidad.id" name="habilidad" id="habilidad">
+          <option disabled selected value="">-- Selecciona una habilidad --</option>
+          <option *ngFor="let habilidad of habilidades" [value]="habilidad.id">
+            {{ habilidad.nombre }}
+          </option>
         </select>
       </div>
     </div>
     <div class="mb-3 py-1">
-      <label for="descripcion" class="form-label">Descripción</label>
-      <textarea
-        class="form-control"
-        [(ngModel)]="modificarEmpleo.descripcion"
-        name="descripcion"
-        id="descripcion"
-        rows="5"
-      ></textarea>
+      <label for="descripcion" class="form-label"><i class="fas fa-align-left"></i> Descripción</label>
+      <textarea class="form-control" [(ngModel)]="empleo.descripcion" name="descripcion" id="descripcion"
+        rows="5"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <button type="submit" class="btn btn-primary">
+      <i class="fas fa-save"></i> {{ modo === 'crear' ? 'Registrar' : 'Actualizar' }}
+    </button>
   </form>
 </div>

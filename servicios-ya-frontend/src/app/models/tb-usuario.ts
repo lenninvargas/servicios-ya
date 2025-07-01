@@ -1,7 +1,7 @@
 import { Pais } from "./Pais";
 
 export interface TbUsuario {
-    id: number;
+    id?: number;
     nombre: string;
     apellidoPat: string;
     apellidoMat: string;

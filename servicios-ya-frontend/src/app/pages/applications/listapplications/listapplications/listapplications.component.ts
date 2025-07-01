@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { TbEmpleo } from '../../../../models/tb-empleo';
 import { PostulanteService } from '../../../../core/services/applications/postulante.service';
 @Component({
@@ -10,6 +10,7 @@ import { PostulanteService } from '../../../../core/services/applications/postul
 export class ListapplicationsComponent implements OnInit {
   empleos: TbEmpleo[] = [];  
   idInput: number | null = null;
+  mensaje: string= '';
 
   constructor(private postulanteService: PostulanteService) {}
 
@@ -25,9 +26,11 @@ export class ListapplicationsComponent implements OnInit {
       (data) => {
         console.log('Datos de los empleos postulados:', data);
         this.empleos = data;  
+        this.mensaje = '';
       },
       (error) => {
-        console.error('Error al obtener postulante:', error);
+        this.empleos = [];
+        this.mensaje='Postulante de ID ' + this.idInput + ' no encotrado';
       }
     );
   }

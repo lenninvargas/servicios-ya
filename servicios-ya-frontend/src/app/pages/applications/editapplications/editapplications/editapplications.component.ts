@@ -8,7 +8,7 @@ import { PostulanteService } from '../../../../core/services/applications/postul
   standalone: false,
   templateUrl: './editapplications.component.html',
   styleUrls: ['./editapplications.component.css']
-})
+}) 
 export class EditapplicationsComponent implements OnInit {
   idUsuario!: number;
   idEmpleo!: number;

@@ -15,7 +15,7 @@ export class DetailsapplicationsComponent implements OnInit{
   idEmpleo!: number;
   postulacion: any;  
 
-  constructor(
+  constructor(  
     private route: ActivatedRoute,
     private postulanteService: PostulanteService,
     private location: Location

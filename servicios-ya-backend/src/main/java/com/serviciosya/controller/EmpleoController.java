@@ -92,11 +92,11 @@ public class EmpleoController {
 	@PostMapping("/search")
 	public ResponseEntity<?> buscarPorTitulo(@RequestBody Map<String, String> body) {
 		String titulo = body.get("titulo");
-		Empleo empleoPorTitulo = empleoService.buscarEmpleoPorTitulo(titulo);
-		if (empleoPorTitulo == null) {
+		List<Empleo> empleos = empleoService.buscarEmpleosPorTituloParcial(titulo);
+		if (empleos.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Empleo no encontrado");
 		} else {
-			return ResponseEntity.ok(empleoPorTitulo);
+			return ResponseEntity.ok(empleos);
 		}
 	}
 
