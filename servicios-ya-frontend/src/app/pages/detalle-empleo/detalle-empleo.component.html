@@ -5,7 +5,9 @@
             <h2>{{ empleo.titulo }}</h2>
             <p class="detalle-subtitulo">Habilidad: {{ empleo.habilidad?.nombre }}</p>
         </div>
-        <button class="btn-aplicar" [routerLink]="['/postulacion', empleo.usuario?.id, empleo.id]">Aplicar Ahora →</button>
+        <button class="btn-aplicar" [routerLink]="['/postulacionEmpleado', empleo.usuario?.id, empleo.id]">
+            Aplicar Ahora →
+        </button>
     </div>
 
     <div class="detalle-body">

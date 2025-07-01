@@ -12,7 +12,7 @@ import { EmpleadosListaComponent } from './pages/empleados-lista/empleados-lista
 
 import { DetalleEmpleoComponent } from './pages/detalle-empleo/detalle-empleo.component';
 import { EmpleosComponent } from './pages/empleos/empleos.component';
-
+import { CrearPostulacionComponent } from './pages/applications/crear-postulacion/crear-postulacion.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,12 +20,18 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
 
   { path: 'actualizar-empleo/:id', component: ActualizarEmpleoComponent },
-  {path: 'postulante', component: ListapplicationsComponent},
-  { path: 'postulacion/:idUsuario/:idEmpleo', component: DetailsapplicationsComponent },
-  { path: 'editapplications/:idUsuario/:idEmpleo', component: EditapplicationsComponent },
-  {path: 'empleadosLista', component: EmpleadosListaComponent},
-
   { path: 'postulante', component: ListapplicationsComponent },
+
+  { path: 'empleadosLista', component: EmpleadosListaComponent },
+
+
+  //EMPLEADO
+  {
+    path: 'postulacionEmpleado/:idUsuario/:idEmpleo',
+    component: CrearPostulacionComponent,
+  },
+
+  //EMPLEADOR
   {
     path: 'postulacion/:idUsuario/:idEmpleo',
     component: DetailsapplicationsComponent,
@@ -34,12 +40,12 @@ const routes: Routes = [
     path: 'editapplications/:idUsuario/:idEmpleo',
     component: EditapplicationsComponent,
   },
+
   { path: 'empleos', component: EmpleosComponent },
   { path: 'empleos/crear', component: ActualizarEmpleoComponent },
   { path: 'empleos/editar/:id', component: ActualizarEmpleoComponent },
   { path: 'empleos/:id', component: DetalleEmpleoComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
-
 ];
 
 @NgModule({

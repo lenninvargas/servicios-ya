@@ -32,6 +32,7 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EmpleosComponent } from './pages/empleos/empleos.component';
 import { DetalleEmpleoComponent } from './pages/detalle-empleo/detalle-empleo.component';
+import { CrearPostulacionComponent } from './pages/applications/crear-postulacion/crear-postulacion.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { DetalleEmpleoComponent } from './pages/detalle-empleo/detalle-empleo.co
 
     EmpleosComponent,
     DetalleEmpleoComponent,
+    CrearPostulacionComponent,
 
   ],
   imports: [

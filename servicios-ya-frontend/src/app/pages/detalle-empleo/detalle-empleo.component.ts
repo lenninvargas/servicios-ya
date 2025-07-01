@@ -12,6 +12,8 @@ import { EmpleoService } from '../../core/services/empleo.service';
 export class DetalleEmpleoComponent implements OnInit {
   empleo: any = {};
 
+  usuario: any;
+
   constructor(
     private route: ActivatedRoute,
     private empleoService: EmpleoService,
@@ -21,7 +23,7 @@ export class DetalleEmpleoComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.empleoService.buscar(Number(id)).subscribe(data => {
       this.empleo = data;
+      this.usuario = JSON.parse(sessionStorage.getItem('usuario')!);
     });
   }
 }
-  

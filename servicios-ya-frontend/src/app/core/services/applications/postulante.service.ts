@@ -4,10 +4,9 @@ import { TbEmpleo } from '../../../models/tb-empleo';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostulanteService {
-
   private baseUrl = 'http://localhost:8080/applications';
 
   constructor(private http: HttpClient) {}
@@ -17,11 +16,21 @@ export class PostulanteService {
   }
 
   obtenerPostulacion(idUsuario: number, idEmpleo: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}?idUsuario=${idUsuario}&idEmpleo=${idEmpleo}`);
+    return this.http.get(
+      `${this.baseUrl}?idUsuario=${idUsuario}&idEmpleo=${idEmpleo}`,
+    );
   }
 
-  editarEstadoPostulante(idUsuario: number, idEmpleo: number, nuevoEstado: boolean): Observable<any> {
-    const body = { estado: nuevoEstado };  
+  crearPostulacion(postulacion: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}`, postulacion);
+  }
+
+  editarEstadoPostulante(
+    idUsuario: number,
+    idEmpleo: number,
+    nuevoEstado: boolean,
+  ): Observable<any> {
+    const body = { estado: nuevoEstado };
     return this.http.put<any>(`${this.baseUrl}/${idUsuario}/${idEmpleo}`, body);
-  }  
+  }
 }
