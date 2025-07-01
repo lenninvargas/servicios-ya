@@ -7,13 +7,24 @@ import { ActualizarEmpleoComponent } from './pages/actualizar-empleo/actualizar-
 import { ListapplicationsComponent } from './pages/applications/listapplications/listapplications/listapplications.component';
 import { DetailsapplicationsComponent } from './pages/applications/detailsapplications/detailsapplications/detailsapplications.component';
 import { EditapplicationsComponent } from './pages/applications/editapplications/editapplications/editapplications.component';
+
+import { EmpleadosListaComponent } from './pages/empleados-lista/empleados-lista.component';
+
 import { DetalleEmpleoComponent } from './pages/detalle-empleo/detalle-empleo.component';
 import { EmpleosComponent } from './pages/empleos/empleos.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+
+  { path: 'actualizar-empleo/:id', component: ActualizarEmpleoComponent },
+  {path: 'postulante', component: ListapplicationsComponent},
+  { path: 'postulacion/:idUsuario/:idEmpleo', component: DetailsapplicationsComponent },
+  { path: 'editapplications/:idUsuario/:idEmpleo', component: EditapplicationsComponent },
+  {path: 'empleadosLista', component: EmpleadosListaComponent},
+
   { path: 'postulante', component: ListapplicationsComponent },
   {
     path: 'postulacion/:idUsuario/:idEmpleo',
@@ -28,6 +39,7 @@ const routes: Routes = [
   { path: 'empleos/editar/:id', component: ActualizarEmpleoComponent },
   { path: 'empleos/:id', component: DetalleEmpleoComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
+
 ];
 
 @NgModule({

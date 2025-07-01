@@ -24,6 +24,9 @@ import { ListapplicationsComponent } from './pages/applications/listapplications
 import { DetailsapplicationsComponent } from './pages/applications/detailsapplications/detailsapplications/detailsapplications.component';
 import { InfoCardComponent } from './components/info-card/info-card.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+
+import { EmpleadosListaComponent } from './pages/empleados-lista/empleados-lista.component';
+
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -44,8 +47,12 @@ import { DetalleEmpleoComponent } from './pages/detalle-empleo/detalle-empleo.co
     DetailsapplicationsComponent,
     InfoCardComponent,
     SearchBarComponent,
+
+    EmpleadosListaComponent,
+
     EmpleosComponent,
     DetalleEmpleoComponent,
+
   ],
   imports: [
     BrowserModule,

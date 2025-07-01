@@ -41,9 +41,14 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
+
+  
+  
     this.habilidadService.listar().subscribe(data => this.habilidades = data);
     this.paisService.listar().subscribe(data => this.paises = data);
   }
+
 
   selectUsuarioTipo(tipo: 'Empleado' | 'Empleador') {
     this.nuevoUsuario.tipoUsuario = tipo;

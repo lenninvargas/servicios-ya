@@ -27,6 +27,7 @@ public class AuthController {
     public ResponseEntity<?> registrarEmpleador(@RequestBody EmpleadorDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.registrarEmpleador(dto));
     }
+    
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
@@ -38,6 +39,19 @@ public class AuthController {
         }
     }
 
+    
+    @GetMapping("/usuarios")
+    public ResponseEntity<?> listarUsuarios() {
+        try {
+            return ResponseEntity.ok(usuarioService.listarUsuarios());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al listar usuarios: " + e.getMessage());
+        }
+    }
+    
+    
+
+
     @GetMapping("/email/{email}")
     public ResponseEntity<?> getUsuarioByEmail(@PathVariable String email) {
         Usuario usuario = usuarioService.findUsuarioByEmail(email); 
@@ -47,5 +61,6 @@ public class AuthController {
             return ResponseEntity.notFound().build();
         }
     }
+
 
 }

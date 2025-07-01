@@ -1,6 +1,7 @@
 package com.serviciosya.service;
 
 import com.serviciosya.DTO.EmpleadoDTO;
+
 import com.serviciosya.DTO.EmpleadorDTO;
 import com.serviciosya.DTO.SecurityDTO;
 import com.serviciosya.model.Empleado;
@@ -11,7 +12,9 @@ import com.serviciosya.model.Usuario;
 import com.serviciosya.repository.IHabilidadRepository;
 import com.serviciosya.repository.IUsuarioRepository;
 
+
 import java.time.LocalDate;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,11 +76,16 @@ public class UsuarioService {
         return usuario;
     }
 
+    public List<Usuario> listarUsuarios(){
+    	return usuarioRepository.findAll();
+
+    }
     public SecurityDTO convertirADTO(Usuario usuario) {
         SecurityDTO dto = new SecurityDTO();
         dto.setEmail(usuario.getEmail());
         dto.setPassword(usuario.getPassword());
         dto.setTipoUsuario(usuario.getTipoUsuario());
         return dto;
+
     }
 }
